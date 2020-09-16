@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theervonam</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/styles-reg.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="images/blak sid.png" alt="">
+        </div>
+    </header>
+    
+    <div class="section"> 
+        <form id="submit-form"  action="">
+            <h2 for="fname">Hotel Name</h2>
+            <input type="text" id="Hname" name="Hotel name" placeholder="Hotel Name">
+            <br>  
+            <br>  
+            <h2 for="Address">Address</h2>
+            <input type="text" id="Address" name="Address" placeholder="Address">
+            <br>  
+            <br> 
+            <h2 for="Name of proprietor">Name of proprietor</h2>
+            <input type="text" id="Name of proprietor" name="Name of proprietor" placeholder="Name of proprietor">
+            <br>  
+            <br> 
+            <h2 for="Contact Number">Contact number</h2>
+            <input type="text" id="Contact Number" name="Contact Number" placeholder="Contact number">
+            <br>  
+            <br>
+                        
+
+    <div class="button">
+        <button class="btn claim"  ><h5>Register</h5></button>
+    </div>
+        
+        <div class="footer">
+            <img src="images/black inst logo .png" alt="">
+        </div>
+        <p>COKUT</p>
+    </div>
+<script>
+ $("#submit-form").submit((e)=>{
+            e.preventDefault()
+            $.ajax({
+                url:"https://script.google.com/macros/s/AKfycbxcIx7fi_Q88Yf1NIcqpABjREPwDp0LXstMyoXc/exec",
+                data:$("#submit-form").serialize(),
+                method:"post",
+                success:function (response){
+                    //alert("Form submitted successfully")
+                    //window.location.reload()
+                    window.location.href="success.html"
+                },
+                error:function (err){
+                    alert("Something Error")
+    
+                }
+            })
+        })
+</script>
+
+</body>
+</html>
