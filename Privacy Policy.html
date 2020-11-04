@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en"><div style="display: none !important; position: static !important; top: 0px !important; left: 0px !important; width: 0px !important; height: 0px !important;" id="twoseven-scripts" data-info="Scripts added by TwoSeven extension"><script type="text/javascript" id="__tmpScript-250943399" data-added-by-two-seven="1">(function() {
+    window.twoseven = {};
+  })();</script><script type="text/javascript" id="__tmpScript-82433118" data-added-by-two-seven="1">(function() {
+    window.twoseven.waitForDOMNode = async function waitForDOMNode(e,t=document){e=e||{};const{type:n,value:o}=e;if(!n||!o)throw new Error("Must specify identifier");let s=o;switch(n){case"tag":s=o.toUpperCase()}if("check"!==n){const e=await i({type:"selector",value:s},[],t);if(e)return new Promise(t=>t(e))}async function i({type:e,value:t},n,o){let s;switch(e){case"tag":s=n.find(e=>e.tagName===t);break;case"selector":s=o.querySelector(t);break;case"check":for(const e of n){if(await t(e))return e}}return s}return new Promise((e,o)=>{const r=new MutationObserver(async o=>{for(const a of o)if("childList"===a.type){const o=Array.from(a.addedNodes),c=await i({type:n,value:s},o,t);if(c)return r.disconnect(),e(c)}});r.observe(t,{childList:!0,subtree:!0})})};
+  })();</script><script type="text/javascript" id="__tmpScript-634991000" data-added-by-two-seven="1">(function() {
+    
+  window.twoseven.reportError = function reportError(e,t,n){"string"==typeof n&&(n={message:n}),Object.assign(n,{error:{message:t.message,stack:t.stack}}),window.tsExtGetPostToParent()({name:name,tag:e,action:"report-error",json:n}),console.error(JSON.stringify(n.error))}
+;
+  })();</script><script type="text/javascript" id="__tmpScript-695048108" data-added-by-two-seven="1">(function() {
+    
+  window.twosevenHmsToSecondsOnly = function(str) {
+      var p = str.split(':'),
+          s = 0, m = 1;
+
+      while (p.length > 0) {
+          s += m * parseInt(p.pop(), 10);
+          m *= 60;
+      }
+
+      return s;
+  }
+;
+  })();</script><script type="text/javascript" id="__tmpScript-617832145" data-added-by-two-seven="1">(function() {
+    window.twosevenExtLog = function twosevenExtLog(e,o,c){o||(o=e,e=void 0);let n=c||"black";if(c)switch(c){case"success":n="Green";break;case"info":n="DodgerBlue";break;case"error":n="Red";break;case"warning":n="Orange";break;default:n=c}e?console.log("%c"+e+": "+o,`color:${n}`):console.log("%c"+o,`color:${n}`)};
+  })();</script><script type="text/javascript" id="__tmpScript-56436095" data-added-by-two-seven="1">(function() {
+    
+  document.twosevenGET = function(url, callback) {
+    var xmlhttp = new XMLHttpRequest();
+
+    xmlhttp.onreadystatechange = function() {
+      if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
+        if (xmlhttp.status == 200) {
+          callback(null, xmlhttp.responseText);
+        } else {
+          callback('something else other than 200 was returned', '');
+        }
+      }
+    };
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send();
+  };
+;
+  })();</script><script type="text/javascript" id="__tmpScript-109959174" data-added-by-two-seven="1">(function() {
+    
+  window.triggerEvent = function(e,t,n,o=!1){let s;o?(n&&"string"!=typeof n&&(n=JSON.stringify(n)),s=n):s={data:n},window.twosevenScriptsDiv&&n&&"object"==typeof n&&(console.warn(`WARNING: Attempting to send an object via event.detail from CS->Page does not work on Firefox: ${JSON.stringify(n)}`),console.error((new Error).stack));var i=new CustomEvent(t,{bubbles:!0,composed:!0,detail:s});e.dispatchEvent(i)}
+;
+  })();</script><script type="text/javascript" id="__tmpScript-269293910" data-added-by-two-seven="1">(function() {
+    window.twoseven.postTo = async function postTo(e,t,n=!1){let o;return t.name=t.name||name,o=n?new Promise(e=>{const n=`ack-${t.action}-${1e9*Math.random()|0}`;t.ack={event:n};window.debug&&["play","pause","currentTime"].some(e=>t.action.includes(e)),window.addEventListener("message",function t({data:o={}}){o.action===n&&(window.removeEventListener("message",t),e(o.json))})}):new Promise(e=>e()),e.postMessage(t,"*"),o};
+  })();</script><script type="text/javascript" id="__tmpScript-196124029" data-added-by-two-seven="1">(function() {
+    window.tsExtGetPostTo = function tsExtGetPostTo(){return window.twoseven&&window.twoseven.postTo||window.postTo};
+  })();</script><script type="text/javascript" id="__tmpScript-964016471" data-added-by-two-seven="1">(function() {
+    window.tsExtGetPostToParent = function tsExtGetPostToParent(){return window.twoseven&&window.twoseven.postToParent||window.postToParent};
+  })();</script><script type="text/javascript" id="__tmpScript-148035483" data-added-by-two-seven="1">(function() {
+    window.twoseven.postResponse = async function postResponse(e,t){const{source:n,data:{ack:{event:o}}}=e;window.tsExtGetPostTo()(n,{action:o,json:t})};
+  })();</script><script type="text/javascript" id="__tmpScript-515300187" data-added-by-two-seven="1">(function() {
+    window.twoseven.postToParent = async function postToParent(e,t=!1){return window.tsExtGetPostTo()(window.parent,e,t)};
+  })();</script><script type="text/javascript" id="__tmpScript-687487346" data-added-by-two-seven="1">(function() {
+    window.twoseven.postToTop = async function postToTop(e,t=!1){return window.tsExtGetPostTo()(window.top,e,t)};
+  })();</script><script type="text/javascript" id="__tmpScript-396362584" data-added-by-two-seven="1">(function() {
+    
+  window.twoseven.getFromStorage = e=>new Promise((t,n)=>{const o="get-from-storage-"+(1e9*Math.random()|0);window.addEventListener(o,e=>{window.removeEventListener(o,this);const{detail:{data:{value:n}}}=e;t(n)}),triggerEvent(window,"get-from-storage",{key:e,evt:o})})
+  window.twoseven.saveToStorage = e=>{triggerEvent(window,"save-to-storage",e)}
+;
+  })();</script><script type="text/javascript" id="__tmpScript-802642265" data-added-by-two-seven="1">(function() {
+    
+  function attachHistoryListeners(){var e=history.pushState;history.pushState=function(t,n,o){return"function"==typeof history.onpushstate&&history.onpushstate({state:t}),triggerEvent(window,"pushstate",{uri:o}),e.apply(history,arguments)};var t=history.replaceState;history.replaceState=function(e){return"function"==typeof history.onreplacestate&&history.onreplacestate({state:e}),t.apply(history,arguments)}}
+  attachHistoryListeners()
+;
+  })();</script><script type="text/javascript" id="__tmpScript-191996748" data-added-by-two-seven="1">(function() {
+    window.twoseven.once = function once(e,t,n){e.addEventListener(t,function o(s){e.removeEventListener(t,o),n(s)})};
+  })();</script><script type="text/javascript" id="__tmpScript-427172211" data-added-by-two-seven="1">(function() {
+    
+  window.twoseven.isOnTwoSevenTab = async () => {
+    const result = await window.twoseven.postTo(window, { action: 'is-on-twoseven-tab' }, true)
+    return result
+  }
+;
+  })();</script><script type="text/javascript" id="__tmpScript-685370540" data-added-by-two-seven="1">(function() {
+    
+  window.twoseven.isPaused = async () => {
+    const result = await window.twoseven.postTo(window, { action: 'twoseven:pause-state' }, true)
+    return result
+  }
+;
+  })();</script><script type="text/javascript" id="__tmpScript-524301055" data-added-by-two-seven="1">(function() {
+    
+      const modal = document.querySelector('.twoseven-ext-tab-media-modal')
+      const modalCloseBtn = modal.querySelector('.close')
+      function closeModal () {
+        modal.style.display = 'none'
+        const frame = document.querySelector('#twoseven-ext-tab-media-iframe').contentWindow
+        frame.postMessage({
+          __evt_name: 'modal-hide'
+        }, '*')
+      }
+      modalCloseBtn.onclick = closeModal
+
+      window.onmessage = function (e) {
+        if (e.data.__evt_name === 'modal-hide') {
+          closeModal()
+        }
+      }
+
+      window.twoseven.closeTabMediaModal = closeModal
+
+      window.onclick = function (e) {
+        if (e.target.id === 'twoseven-ext-tab-media-modal' && modal.style.display === 'block') {
+            closeModal()
+        }
+      }
+    ;
+  })();</script></div><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Privacy Policy</title>
+<link href="Privacy%20Policy_files/bootstrap.css" rel="stylesheet">
+<link href="Privacy%20Policy_files/live.css" rel="stylesheet">
+
+<meta name="robots" content="noindex">
+
+<link href="Privacy%20Policy_files/modal.css" rel="stylesheet" id="__tmpStyle"></head>
+<body>
+<div class="wrapper">
+<div class="page">
+<div class="container">
+<div class="row">
+<div class="col-md-12">
+<h1>Privacy Policy for Cokut</h1>
+<p>At COKUT, accessible from cokutonline.com, one of our main priorities
+ is the privacy of our visitors. This Privacy Policy document contains 
+types of information that is collected and recorded by COKUT and how we 
+use it.</p>
+<p>If you have additional questions or require more information about our Privacy Policy, do not hesitate to contact us.</p>
+<p>This Privacy Policy applies only to our online activities and is 
+valid for visitors to our website with regards to the information that 
+they shared and/or collect in COKUT. This policy is not applicable to 
+any information collected offline or via channels other than this 
+website. Our Privacy Policy was created with the help of the <a href="https://www.privacypolicygenerator.info/">Privacy Policy Generator</a> and the <a href="https://www.privacypolicies.com/privacy-policy-generator/">Free Privacy Policy Generator</a>.</p>
+<h2>Consent</h2>
+<p>By using our website, you hereby consent to our Privacy Policy and 
+agree to its terms. For our Terms and Conditions, please visit the <a href="https://www.privacypolicyonline.com/terms-conditions-generator/">Terms &amp; Conditions Generator</a>.</p>
+<h2>Information we collect</h2>
+<p>The personal information that you are asked to provide, and the 
+reasons why you are asked to provide it, will be made clear to you at 
+the point we ask you to provide your personal information.</p>
+<p>If you contact us directly, we may receive additional information 
+about you such as your name, email address, phone number, the contents 
+of the message and/or attachments you may send us, and any other 
+information you may choose to provide.</p>
+<p>When you register for an Account, we may ask for your contact 
+information, including items such as name, company name, address, email 
+address, and telephone number.</p>
+<h2>How we use your information</h2>
+<p>We use the information we collect in various ways, including to:</p>
+<ul>
+<li>Provide, operate, and maintain our webste</li>
+<li>Improve, personalize, and expand our webste</li>
+<li>Understand and analyze how you use our webste</li>
+<li>Develop new products, services, features, and functionality</li>
+<li>Communicate with you, either directly or through one of our 
+partners, including for customer service, to provide you with updates 
+and other information relating to the webste, and for marketing and 
+promotional purposes</li>
+<li>Send you emails</li>
+<li>Find and prevent fraud</li>
+</ul>
+<h2>Log Files</h2>
+<p>COKUT follows a standard procedure of using log files. These files 
+log visitors when they visit websites. All hosting companies do this and
+ a part of hosting services' analytics. The information collected by log
+ files include internet protocol (IP) addresses, browser type, Internet 
+Service Provider (ISP), date and time stamp, referring/exit pages, and 
+possibly the number of clicks. These are not linked to any information 
+that is personally identifiable. The purpose of the information is for 
+analyzing trends, administering the site, tracking users' movement on 
+the website, and gathering demographic information.</p>
+<h2>Advertising Partners Privacy Policies</h2>
+<p>You may consult this list to find the Privacy Policy for each of the advertising partners of COKUT.</p>
+<p>Third-party ad servers or ad networks uses technologies like cookies,
+ JavaScript, or Web Beacons that are used in their respective 
+advertisements and links that appear on COKUT, which are sent directly 
+to users' browser. They automatically receive your IP address when this 
+occurs. These technologies are used to measure the effectiveness of 
+their advertising campaigns and/or to personalize the advertising 
+content that you see on websites that you visit.</p>
+<p>Note that COKUT has no access to or control over these cookies that are used by third-party advertisers.</p>
+<h2>Third Party Privacy Policies</h2>
+<p>COKUT's Privacy Policy does not apply to other advertisers or 
+websites. Thus, we are advising you to consult the respective Privacy 
+Policies of these third-party ad servers for more detailed information. 
+It may include their practices and instructions about how to opt-out of 
+certain options. </p>
+<p>You can choose to disable cookies through your individual browser 
+options. To know more detailed information about cookie management with 
+specific web browsers, it can be found at the browsers' respective 
+websites.</p>
+<h2>CCPA Privacy Rights (Do Not Sell My Personal Information)</h2>
+<p>Under the CCPA, among other rights, California consumers have the right to:</p>
+<p>Request that a business that collects a consumer's personal data 
+disclose the categories and specific pieces of personal data that a 
+business has collected about consumers.</p>
+<p>Request that a business delete any personal data about the consumer that a business has collected.</p>
+<p>Request that a business that sells a consumer's personal data, not sell the consumer's personal data.</p>
+<p>If you make a request, we have one month to respond to you. If you 
+would like to exercise any of these rights, please contact us.</p>
+<h2>GDPR Data Protection Rights</h2>
+<p>We would like to make sure you are fully aware of all of your data protection rights. Every user is entitled to the following:</p>
+<p>The right to access – You have the right to request copies of your 
+personal data. We may charge you a small fee for this service.</p>
+<p>The right to rectification – You have the right to request that we 
+correct any information you believe is inaccurate. You also have the 
+right to request that we complete the information you believe is 
+incomplete.</p>
+<p>The right to erasure – You have the right to request that we erase your personal data, under certain conditions.</p>
+<p>The right to restrict processing – You have the right to request that
+ we restrict the processing of your personal data, under certain 
+conditions.</p>
+<p>The right to object to processing – You have the right to object to 
+our processing of your personal data, under certain conditions.</p>
+<p>The right to data portability – You have the right to request that we
+ transfer the data that we have collected to another organization, or 
+directly to you, under certain conditions.</p>
+<p>If you make a request, we have one month to respond to you. If you 
+would like to exercise any of these rights, please contact us.</p>
+<h2>Children's Information</h2>
+<p>Another part of our priority is adding protection for children while 
+using the internet. We encourage parents and guardians to observe, 
+participate in, and/or monitor and guide their online activity.</p>
+<p>COKUT does not knowingly collect any Personal Identifiable 
+Information from children under the age of 13. If you think that your 
+child provided this kind of information on our website, we strongly 
+encourage you to contact us immediately and we will do our best efforts 
+to promptly remove such information from our records.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div>
+    <div id="twoseven-ext-tab-media-modal" class="twoseven-ext-tab-media-modal" style="display: none;">
+      <!-- Modal content -->
+      <div class="twoseven-ext-tab-media-modal-content">
+        <div class="iframe-container" style="height: 100%; width: 100%;">
+          <span class="close">×</span>
+        </div>
+      </div>
+    </div></div></body></html>
